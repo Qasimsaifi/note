@@ -2,7 +2,8 @@
   import { onMount } from "svelte";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
-
+  import { writable } from "svelte/store";
+  const isAutoSave = writable(false);
   let EditorJS,
     List,
     Header,
@@ -66,7 +67,21 @@
       },
       data: JSON.parse(note.content), // Parse the JSON content from the API
       placeholder: "Content",
+      onChange: (api, event) => {
+        autoSave();
+      },
     });
+    editorInstance.isReady
+      .then(() => {
+        editorInstance.addEventListener("change", () => {
+          if ($isAutoSave) {
+            saveNote();
+          }
+        });
+      })
+      .catch((error) => {
+        console.error("EditorJS initialization error:", error);
+      });
   }
 
   async function saveNote() {
@@ -97,6 +112,15 @@
       }
     } catch (err) {
       // console.error("An error occurred while saving the note");
+    }
+  }
+
+  console.log($isAutoSave);
+  function autoSave() {
+    console.log("auto save called");
+    if ($isAutoSave) {
+      console.log("called from if");
+      saveNote();
     }
   }
 
@@ -169,26 +193,31 @@
 {#if error}
   <p class="text-red-500">{error}</p>
 {:else if note}
-  <div class="btn-group mt-2 flex justify-start ml-2">
-    {#if saving}
-      <button class="px-4 py-2 btn btn-sm">Saving..</button>
-    {:else}
-      <button on:click={saveNote} class="px-4 py-2 btn btn-sm"> Save</button>
-    {/if}
-    {#if isDeleting}
-      <button class="px-4 py-2 btn btn-error btn-sm"> Deleting.. </button>
-    {:else}
-      <button on:click={deleteNote} class="px-4 py-2 btn btn-error btn-sm">
-        Delete
-      </button>
-    {/if}
+  <div class="flex justify-between items-center mt-2 ml-4 mr-4">
+    <div class="btn-group flex">
+      {#if saving}
+        <button class="px-4 py-2 btn btn-sm">Saving..</button>
+      {:else}
+        <button on:click={saveNote} class="px-4 py-2 btn btn-sm">Save</button>
+      {/if}
+      {#if isDeleting}
+        <button class="px-4 py-2 btn btn-error btn-sm">Deleting..</button>
+      {:else}
+        <button on:click={deleteNote} class="px-4 py-2 btn btn-error btn-sm">
+          Delete
+        </button>
+      {/if}
+    </div>
+    <input type="checkbox" class="toggle" bind:checked={$isAutoSave} />
   </div>
+
   <div class="mt-4 flex justify-center">
     <div class="relative input-wrapper">
       <input
         type="text"
         id="title"
         bind:value={note.title}
+        on:input={autoSave}
         class="px-2 py-1 w-full sm:w-full h-24 lg:w-[42vw] sm:mx-2 focus:outline-none text-2xl input"
         placeholder="Title"
         on:mouseenter={toggleTooltip}

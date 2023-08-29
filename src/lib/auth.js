@@ -6,7 +6,7 @@ export async function login(email, password) {
     },
     body: JSON.stringify({
       email,
-      password
+      password,
     })
   });
 
@@ -18,11 +18,28 @@ export async function login(email, password) {
     throw new Error("Login failed");
   }
 }
-// auth.js
-
-// ... (your previous code)
-
 export function logout() {
-  // Clear the access token from localStorage
   localStorage.removeItem('access_token');
+}
+
+
+
+export async function register(email, username, password) {
+  const response = await fetch("https://notes-api.kasimsaifi.tech/api/users/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      email,
+      username,
+      password
+    })
+  });
+
+  if (response.ok) {
+    // console.log("Registration successful");
+  } else {
+    // throw new Error("Registration failed");
+  }
 }

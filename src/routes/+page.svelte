@@ -11,7 +11,7 @@
   let isLoggedIn = accessToken !== null;
 
   if (!isLoggedIn) {
-    goto("/login"); // Redirect to login page if not logged in
+    goto("/login"); 
   }
 
   onMount(async () => {
@@ -81,15 +81,26 @@
     </div>
   </div>
 {/if}
-
+{#if notes.length > 0}
+  <h1>There is no notes <a href="/new">Create one</a></h1>
+{/if}
+{#if notes.length === 0}
+<div class="flex justify-center items-center h-[70vh]">
+  <div class="text-center">
+    <h1 class="text-2xl font-bold mb-4">No notes created.</h1>
+    <a href="/new" class="text-blue-500 underline">Create one</a>
+  </div>
+</div>
+{:else}
 <div class="container mx-auto px-4">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
     {#each notes as note}
       <div class="card bg-base-100 shadow-xl card-bordered">
         <div class="card-body">
           <a href={`/note/${note._id}`} class="note-link">
             <h2 class="card-title">{note.title}</h2>
-            <span class="card bg-base-100  shadow-xl card-bordered" />
+            <span class="card bg-base-100 shadow-xl card-bordered" />
             <div class="overflow-hidden h-24">
               <p>{note.content}</p>
             </div>
@@ -97,9 +108,8 @@
 
           <div class="btn-group mt-2 flex justify-end">
             <button class="btn btn-sm">Edit</button>
-            <button
-              class="btn btn-sm"
-              on:click={handleDelete(note._id)}>Delete</button
+            <button class="btn btn-sm" on:click={handleDelete(note._id)}
+              >Delete</button
             >
           </div>
         </div>
@@ -107,3 +117,4 @@
     {/each}
   </div>
 </div>
+{/if}
