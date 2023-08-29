@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.emoji-404 {
+  position: relative;
+  animation: mymove 2.5s infinite;
+}
+
+@keyframes mymove {
+  33% {
+    top: 0px;
+  }
+  66% {
+    top: 20px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+.ce-block__content h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.ce-block__content h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.ce-block__content h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.ce-block__content h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.ce-block__content h5 {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.ce-block__content h6 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.ce-code__textarea {
+  background-color: #333 !important; /* Dark gray background color */
+  font-family: "Courier New", monospace !important;
+  font-size: 14px !important;
+  color: white !important;
+  padding: 10px !important; 
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+.cdx-marker {
+  background-color: rgb(255, 174, 0) !important; /* Set your desired highlight color */
+  color: black !important; /* Set text color */
+  font-weight: bold !important; 
+  margin: 1px;
+}
+.input{
+  font-weight: bold !important;
+}
