@@ -95,7 +95,6 @@
         table: Table,
       },
       placeholder: "Content",
-      onChange: autoSave(),
     });
   });
   function handleGoBack() {
@@ -124,7 +123,7 @@
   />
 </div>
 
-<div id="editorjs" class="w-screen" on:change={autoSave} />
+<div id="editorjs" class="w-screen"/>
 
 <style>
   #editorjs {
