@@ -208,7 +208,10 @@
         </button>
       {/if}
     </div>
-    <input type="checkbox" class="toggle" bind:checked={$isAutoSave} />
+    <div class="flex items-center"> <!-- Adjusted this line -->
+      <label for="toggle" class="mr-1">Auto save</label> <!-- Adjusted this line -->
+      <input type="checkbox" name="toggle" id="toggle" class="toggle" bind:checked={$isAutoSave} />
+    </div>
   </div>
 
   <div class="mt-4 flex justify-center">
@@ -218,7 +221,7 @@
         id="title"
         bind:value={note.title}
         on:input={autoSave}
-        class="px-2 py-1 w-full sm:w-full h-24 lg:w-[42vw] sm:mx-2 focus:outline-none text-2xl input"
+        class="px-2 py-1 w-full sm:w-full  lg:w-[42vw] sm:mx-2 focus:outline-none text-2xl input"
         placeholder="Title"
         on:mouseenter={toggleTooltip}
         on:mouseleave={toggleTooltip}
@@ -233,7 +236,10 @@
       {/if}
     </div>
   </div>
-  <div id="editorjs" />
+  <div class="px-2">
+
+    <div id="editorjs" />
+  </div>
 {:else}
   <div class="flex justify-center items-center h-[70vh]">
     <span class="loading loading-spinner loading-lg" />

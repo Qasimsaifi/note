@@ -51,9 +51,13 @@
         <li>
           <a href="/new">Add Note</a>
         </li>
+        <li>
+      <ThemeSelector />
+
+        </li>
       </ul>
     </div>
-    <a class="btn btn-ghost normal-case text-xl" href="/"> Notes Desk </a>
+    <a class="btn btn-ghost normal-case text-xl" href="/">Desk</a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
@@ -75,7 +79,13 @@
           Login
         </a>
       {/if}
-      <ThemeSelector />
+      <div class="hidden md:block lg:hidden">
+        <ThemeSelector />
+      </div>
+      
+      
+      
+
   </div>
 </div>
 <hr />
