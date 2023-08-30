@@ -79,7 +79,7 @@
           Login
         </a>
       {/if}
-      <div class="hidden md:block lg:hidden">
+      <div class="hidden md:block ">
         <ThemeSelector />
       </div>
       
