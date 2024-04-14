@@ -40,6 +40,8 @@
 		"@tiptap/core": "^2.1.7",
 		"@tiptap/pm": "^2.1.7",
 		"@tiptap/starter-kit": "^2.1.7",
+		"@vercel/analytics": "^1.2.2",
+		"@vercel/speed-insights": "^1.0.10",
 		"froala-editor": "^4.1.1",
 		"iconify-icon": "^1.0.8"
 	}

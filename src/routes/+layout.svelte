@@ -1,9 +1,16 @@
 <script>
   import "./app.css";
-  import 'iconify-icon'
+  import "iconify-icon";
   import { onMount } from "svelte";
   import { theme } from "../store/themeStore";
   import Navbar from "../components/Navbar.svelte";
+  import { dev } from "$app/environment";
+  import { inject } from "@vercel/analytics";
+  import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+ 
+  
+  inject({ mode: dev ? "development" : "production" });
+  injectSpeedInsights();
   let isThemeLoaded = false;
   let isDataLoaded = false; // Add this flag for data loading
   export const ssr = false;
